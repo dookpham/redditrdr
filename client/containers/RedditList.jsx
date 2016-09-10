@@ -4,7 +4,6 @@ import RedditView from '../components/RedditView.jsx';
 
 const RedditList = (props) => {
   var items = props.list.map((val, i) => {
-    console.log(i, val.data);
     return <RedditView key={i} {...val.data} />;
   });
 

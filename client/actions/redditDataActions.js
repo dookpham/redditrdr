@@ -12,7 +12,6 @@ export const fetchHomeView = () => {
 
     axios.get('http://www.reddit.com/.json')
       .then(response => {
-        console.log(response.data.data.children);
         dispatch(loadNewRedditData({array: response.data.data.children.slice(0)}));
       })
   }
