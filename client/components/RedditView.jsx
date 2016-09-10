@@ -6,9 +6,16 @@ class RedditView extends Component {
   }
 
   render() {
+    var img;
+    if (this.props.preview) {
+      img = <img className="previewImage" src={this.props.preview.images[0].source.url} />
+    }
     return (
       <div>
-        {this.props.title}
+        <h3>{this.props.title}</h3>
+        <p>({this.props.domain})</p>
+        {img}
+        <p>by {this.props.author} in /r/{this.props.subreddit}</p>
       </div>
     );
   }

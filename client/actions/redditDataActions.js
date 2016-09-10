@@ -14,8 +14,6 @@ export const fetchHomeView = () => {
       .then(response => {
         console.log(response.data.data.children);
         dispatch(loadNewRedditData({array: response.data.data.children.slice(0)}));
-        // redditData = response.data.children;
-        // return response.data.children.slice(0);
       })
   }
 }

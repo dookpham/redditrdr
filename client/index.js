@@ -5,7 +5,7 @@ import thunk from 'redux-thunk';
 import { Provider, connect } from 'react-redux';
 import { createStore, applyMiddleware } from 'redux';
 import appReducer from './reducers/index';
-import RedditList from './containers/RedditList.jsx';
+import App from './components/App.jsx';
 import { fetchHomeView } from './actions/redditDataActions';
 
 const middleware = [thunk, logger()];
@@ -15,10 +15,7 @@ store.dispatch(fetchHomeView());
 
 ReactDOM.render(
   <Provider store={store}>
-    <div>
-      <h1>Reddit Rdr</h1>
-      <RedditList />
-    </div>
+    <App />
   </Provider>
   , document.getElementById('app')
 );
