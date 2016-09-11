@@ -6,6 +6,10 @@ const redditData = (state = [], action) => {
     return action.array.concat(state);
   case 'ADD_NEW_DATA':
     return action.array;
+  case 'FILTER_REDDITDATA':
+    return state.filter(val => {
+      return val.data.subreddit.toLowerCase() !== action.string.toLowerCase();
+    });
   default:
     return state;
   }

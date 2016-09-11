@@ -12,6 +12,8 @@ const baseUrl = 'https://www.reddit.com/api/v1/';
 const port = process.env.PORT || 65010;
 const request = require('request-promise').defaults({json: true});
 const expected_redirect_uri = `http://localhost:${port}/authorize_callback`;
+
+// access_token should be stored in sessions;
 var access_token;
 
 //this should be in a credentials file in .gitignore
@@ -36,34 +38,24 @@ app.get('/api/subreddit', (req, res) => {
 
   console.log('query:', query);
   if (query.string) {
-    // request.post({
-    //   uri: `https://oauth.reddit.com/api/search_reddit_names`,
+
+    // request.get({
+    //   uri: `https://oauth.reddit.com/subreddits/search?q=${query.string}`,
     //   headers: {
     //     'Authorization': `bearer ${access_token}`,
     //     'User-Agent': 'customUserAgentForWonderWorkshopCodingChallengeGogogo',
-    //   },
-    //   body: {
-    //     query: query.string,
     //   }
     // })
-    // request.get({
-    //   uri: `https://oauth.reddit.com/r/'${query.string}.json`,
-    //   'Content-Type': 'application/json',
-    //   headers: {
-    //     'Authorization': `bearer ${access_token}`,
-    //     'User-Agent': 'customUserAgentForWonderWorkshopCodingChallengeGogogo',
-    //   },
-    // })
     request.get({
-      uri: `https://oauth.reddit.com/subreddits/search?q=${query.string}`,
+      uri: `https://oauth.reddit.com/r/${query.string}`,
       headers: {
         'Authorization': `bearer ${access_token}`,
         'User-Agent': 'customUserAgentForWonderWorkshopCodingChallengeGogogo',
       }
     })
     .then(results => {
-      console.log('results:', results.body);
-      res.end();
+      console.log('results:', results);
+      res.json(results);
     })
     .catch(err => {
       console.log('error:', err);
@@ -84,12 +76,6 @@ app.get('/authorize_callback', (req, res) => {
       console.log('access_token:', token_info.access_token);
       access_token = token_info.access_token;
       app.use('/', express.static(path.join(__dirname, '../public') ));
-
-      const options = {
-        headers: {
-          access_token: access_token,
-        }
-      }
       res.sendFile(path.join(__dirname, '../public/index.html'));
     }).catch(err => handleError(res, err, state, results));
   } else if (query.error === 'access_denied') {

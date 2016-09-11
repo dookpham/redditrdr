@@ -8,7 +8,8 @@ class RedditView extends Component {
   render() {
     var img;
     if (this.props.preview) {
-      img = <img className="previewImage" src={this.props.preview.images[0].source.url} />
+      // img = <img className="previewImage" src={this.props.preview.images[0].source.url} />
+      img = <img className="previewImage" src={this.props.icon_img} />
     }
     return (
       <div>

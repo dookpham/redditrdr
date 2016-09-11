@@ -5,7 +5,7 @@ import SubRedditTag from '../containers/SubRedditTag.jsx';
 const SubRedditList = (props) => {
   var items = props.subReddits.map((val, i) => {
     console.log(i, val);
-    return <SubRedditTag key={i} name={val} />;
+    return <SubRedditTag key={i} {...val} />;
   });
 
   return (
