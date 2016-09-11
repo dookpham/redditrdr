@@ -7,7 +7,9 @@ import { createStore, applyMiddleware } from 'redux';
 import appReducer from './reducers/index';
 import App from './components/App.jsx';
 import { fetchHomeView } from './actions/redditDataActions';
+// import authorize from './helpers/authorize';
 
+// authorize();
 const middleware = [thunk, logger()];
 let store = createStore(appReducer, applyMiddleware(...middleware));
 

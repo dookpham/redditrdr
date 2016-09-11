@@ -1,8 +1,15 @@
 import axios from 'axios';
 
-const loadNewRedditData = ({array}) => {
+export const loadNewRedditData = ({array}) => {
   return {
     type: 'ADD_NEW_DATA',
+    array
+  }
+}
+
+export const loadMoreRedditData = ({array}) => {
+  return {
+    type: 'ADD_MORE_DATA',
     array
   }
 }
