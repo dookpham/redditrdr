@@ -8,36 +8,17 @@ class RedditView extends Component {
   render() {
     var img;
     if (this.props.preview) {
-      // img = <img className="previewImage" src={this.props.preview.images[0].source.url} />
-      img = <img className="previewImage" src={this.props.icon_img} />
+      img = <img className="previewImage" src={this.props.preview.images[0].source.url} />
     }
     return (
       <div>
-        <h3>{this.props.title}</h3>
-        <p>({this.props.domain})</p>
+        <a href={this.props.url} target="_blank"><h3>{this.props.title}</h3></a>
+        <p>({this.props.domain}) Score: {this.props.ups} 👍</p>
         {img}
         <p>by {this.props.author} in /r/{this.props.subreddit}</p>
       </div>
     );
   }
 }
-
-//get reddit homeview
-// const createComponentView = ()
-
-// const createComponent = function(child) {
-//   const data = child.data;
-//   const url = data.url;
-//   const title = data.title;
-//   const domain = data.domain;
-//   const ups = data.ups;
-//   //downs not accurate
-//   const img = data.preview.images[0].source; //height, url, width
-//   const author = data.author;
-//   const subreddit = data.subreddit;
-
-
-// }
-
 
 export default RedditView;

@@ -36,25 +36,21 @@ const getAuthenticationUrl = (state, results) => {
 app.get('/api/subreddit', (req, res) => {
   const query = url.parse(req.url, true).query;
 
-  console.log('query:', query);
+  // console.log('query:', query);
   if (query.string) {
-
-    // request.get({
-    //   uri: `https://oauth.reddit.com/subreddits/search?q=${query.string}`,
-    //   headers: {
-    //     'Authorization': `bearer ${access_token}`,
-    //     'User-Agent': 'customUserAgentForWonderWorkshopCodingChallengeGogogo',
-    //   }
-    // })
+    var uri = `https://oauth.reddit.com/r/${query.string}`;
+    if (query.after) {
+      uri += `?after=${query.after}`;
+    }
     request.get({
-      uri: `https://oauth.reddit.com/r/${query.string}`,
+      uri: uri,
       headers: {
         'Authorization': `bearer ${access_token}`,
         'User-Agent': 'customUserAgentForWonderWorkshopCodingChallengeGogogo',
       }
     })
     .then(results => {
-      console.log('results:', results);
+      // console.log('results:', results);
       res.json(results);
     })
     .catch(err => {
@@ -73,7 +69,7 @@ app.get('/authorize_callback', (req, res) => {
       auth: {user: results.client_id, pass: results.client_secret || ''},
       form: {grant_type: 'authorization_code', code: query.code, redirect_uri: expected_redirect_uri}
     }).then(token_info => {
-      console.log('access_token:', token_info.access_token);
+      // console.log('access_token:', token_info.access_token);
       access_token = token_info.access_token;
       app.use('/', express.static(path.join(__dirname, '../public') ));
       res.sendFile(path.join(__dirname, '../public/index.html'));
