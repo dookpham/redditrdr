@@ -2,10 +2,12 @@
 > A better reader for Reddit.
 
 ## Usage
-From within the root directory
-npm install
+From within the root directory:
 
-npm start
+> npm install
+
+> npm start
 
 open browser to
-  localhost:65010
+
+> localhost:65010
